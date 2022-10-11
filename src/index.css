@@ -12,10 +12,7 @@ html, body, #root  {
 .wallet-option-list li {
 	margin: 1em;
 }
-.wallet-option {
-	display: flex;
-	align-items: center;
-}
+
 .wallet-branding {
 	width: 2em;
 	margin-right:0.5em

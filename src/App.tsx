@@ -9,7 +9,7 @@ import {
 import { ConstantProductAMM } from "../contracts/constantproductamm_client";
 
 import WalletSelector from "./WalletSelector";
-import { AppBar, Box, Toolbar, Typography, Divider, Tab, Tabs } from "@mui/material";
+import { Box, Typography, Divider, Tab, Tabs } from "@mui/material";
 
 import CreateAssets from "./stages/0_create_assets";
 import InitAMM from "./stages/1_init_amm";
@@ -88,23 +88,12 @@ export default function App() {
   // The app ui
   return (
     <div className="App">
-      <AppBar position="static">
-        <Toolbar variant="regular">
-          <Box sx={{ flexGrow: 1 }} />
-          <Box>
-            {/* 
-              Adding our wallet selector here with hooks to acct settings 
-              lets us provide an input for logging in with different wallets
-              and updating session and in memory state
-            */}
-            <WalletSelector
-              network={network}
-              accountSettings={accountSettings}
-              setAccountSettings={setAccountSettings}
-            />
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <header>
+        <Box m={2} display="flex" justifyContent="end">
+          <WalletSelector network={network} accountSettings={accountSettings} setAccountSettings={setAccountSettings} />
+        </Box>
+        <Divider />
+      </header>
       <Box display="flex" flexDirection="column" gap={2} mt={2} position="relative" alignItems="center">
         <Typography variant="h3" fontWeight={700} textAlign="center" mb={2}>Constant Product AMM Demo</Typography>
         <Tabs value={tab} onChange={(e, newVal) => setTab(newVal)}>
