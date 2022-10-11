@@ -27,7 +27,7 @@ export default function Swap({app, setApp, appClient}){
 	})
 
 	return(
-		<StageCard currStage={app.stage} triggerStage={4} title="Swap" error={isError} sx={{width: '300px', marginBottom: '1rem'}}>
+		<StageCard currStage={app.stage} triggerStage={4} title="Swap" error={isError} sx={{width: '300px'}}>
 			<CardContent>
 				<Box display="flex" flexDirection="column" gap={2}>
 					<Typography variant="h5">Swap {swap ? 'A to B' : 'B to A'}</Typography>

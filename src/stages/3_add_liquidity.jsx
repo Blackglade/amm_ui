@@ -39,7 +39,7 @@ export default function AddLiquidity({app, setApp, appClient}){
 	})
 
 	return(
-		<StageCard currStage={app.stage} triggerStage={3} title="Add Liquidity" error={isError} sx={{width: '100%', maxWidth: '350px', height: '233px'}}>
+		<StageCard currStage={app.stage} triggerStage={3} title="Add Liquidity" error={isError}>
 			<CardContent>
 				<Chip label={typeof data !== 'undefined' ? `Recieved ${data} Pool Tokens` : 'No Liquidity'} />
 			</CardContent>

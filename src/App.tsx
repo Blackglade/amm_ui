@@ -1,5 +1,5 @@
 import algosdk from "algosdk";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Network, APIProvider, getAlgodClient } from "beaker-ts/lib/clients";
 import {
   PlaceHolderSigner,
@@ -9,7 +9,7 @@ import {
 import { ConstantProductAMM } from "./constantproductamm_client";
 
 import WalletSelector from "./WalletSelector";
-import { AppBar, Box, Toolbar, Typography, Divider } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Divider, Tab, Tabs } from "@mui/material";
 
 import CreateAssets from "./stages/0_create_assets";
 import InitAMM from "./stages/1_init_amm";
@@ -17,6 +17,11 @@ import OptIn from "./stages/2_opt_in";
 import AddLiquidity from "./stages/3_add_liquidity";
 import Swap from "./stages/4_swap";
 import Burn from "./stages/4_burn";
+
+const TabPanel = (props: {children?: ReactNode, value: number, index: number, flexDirection: "row" | "column"}) => {
+  const { children, value, index, flexDirection } = props;
+  return(<div role="tabpanel" hidden={value !== index}>{value === index && <Box display="flex" flexDirection={flexDirection} gap={2}>{children}</Box>}</div>)
+}
 
 // AnonClient can still allow reads for an app but no transactions
 // can be signed
@@ -38,6 +43,8 @@ export default function App() {
       id: 0
     }
 	})
+
+  const [tab, setTab] = useState(0)
 
   // Setup config for client/network. 
   const [apiProvider, setApiProvider] = useState(APIProvider.Sandbox);
@@ -100,27 +107,21 @@ export default function App() {
       </AppBar>
       <Box display="flex" flexDirection="column" gap={2} mt={2} position="relative" alignItems="center">
         <Typography variant="h3" fontWeight={700} textAlign="center" mb={2}>Constant Product AMM Demo</Typography>
-        <Box display="flex" gap={2}>
-          <Box>
-            <Typography variant="h5" fontWeight={700} mb={2} textAlign="center">Admin Setup</Typography>
-            <Box display="flex" flexDirection="column" gap={2}>
-              <Box display="flex" gap={2}>
-                <CreateAssets app={app} setApp={setApp} appClient={appClient} />
-                 <InitAMM app={app} setApp={setApp} appClient={appClient} />
-              </Box>
-              <Box display="flex" gap={2}>
-                  <OptIn app={app} setApp={setApp} appClient={appClient} />
-                  <AddLiquidity app={app} setApp={setApp} appClient={appClient} />
-              </Box>
-            </Box>
-          </Box>
-          <Divider orientation="vertical" flexItem />
-          <Box>
-            <Typography variant="h5" fontWeight={700} mb={2} textAlign="center">AMM Functions</Typography>
-            <Swap app={app} setApp={setApp} appClient={appClient} />
+        <Tabs value={tab} onChange={(e, newVal) => setTab(newVal)}>
+          <Tab label='Admin Setup' />
+          <Tab label='AMM Functions' />
+        </Tabs>
+        <TabPanel value={tab} index={0} flexDirection="row">
+          <CreateAssets app={app} setApp={setApp} appClient={appClient} />
+          <InitAMM app={app} setApp={setApp} appClient={appClient} />
+          <OptIn app={app} setApp={setApp} appClient={appClient} />
+          <AddLiquidity app={app} setApp={setApp} appClient={appClient} />
+        </TabPanel>
+        <TabPanel value={tab} index={1} flexDirection="row">
+
+          <Swap app={app} setApp={setApp} appClient={appClient} />
             <Burn app={app} setApp={setApp} appClient={appClient} />
-          </Box>
-        </Box>
+        </TabPanel>
       </Box>
     </div>
   );

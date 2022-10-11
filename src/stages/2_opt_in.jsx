@@ -31,7 +31,7 @@ export default function OptIn({app, setApp, appClient}){
 	})
 
 	return(
-		<StageCard currStage={app.stage} triggerStage={2} title="Opt-In" error={isError} sx={{minWidth: '222px', height: '233px'}}>
+		<StageCard currStage={app.stage} triggerStage={2} title="Opt-In" error={isError}>
 			<CardContent>
 				<Chip label={'Pool Token ID: '  + ('poolToken' in app.data ? app.data.poolToken : 'N/A')} />
 			</CardContent>
