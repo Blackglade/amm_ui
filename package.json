@@ -1,10 +1,11 @@
 {
-  "name": "hello-beaker",
+  "name": "amm_demo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate": "npx beaker generate ./contracts/artifacts/ConstantProductAMM.json ./contracts/",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "rebuild": "npx beaker generate contracts/artifacts/HelloBeaker.json src/"

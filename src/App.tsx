@@ -6,7 +6,7 @@ import {
   SessionWalletManager,
   SessionWalletData,
 } from "beaker-ts/lib/web";
-import { ConstantProductAMM } from "./constantproductamm_client";
+import { ConstantProductAMM } from "../contracts/constantproductamm_client";
 
 import WalletSelector from "./WalletSelector";
 import { AppBar, Box, Toolbar, Typography, Divider, Tab, Tabs } from "@mui/material";

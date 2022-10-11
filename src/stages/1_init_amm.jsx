@@ -46,7 +46,7 @@ export default function InitAMM({app, setApp, appClient}){
 	})
 
 	return(
-		<StageCard currStage={app.stage} triggerStage={1} title="Init AMM" error={isError} sx={{maxWidth: '350px'}}>
+		<StageCard currStage={app.stage} triggerStage={1} title="Init AMM" error={isError} sx={{width: '350px'}}>
 			<CardContent>
 				<Box display="flex" flexDirection="column" gap={1}>
 					<Chip label={('App ID: ' + (app.data.id !== 0 ? app.data.id : 'Not Deployed'))} />
