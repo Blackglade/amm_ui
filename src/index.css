@@ -4,16 +4,3 @@ html, body, #root  {
 	font-size: 16px;
 	font-family: 'IBM Plex Sans', sans-serif;
 }
-
-.wallet-option-list {
-	list-style: none;
-}
-
-.wallet-option-list li {
-	margin: 1em;
-}
-
-.wallet-branding {
-	width: 2em;
-	margin-right:0.5em
-}
