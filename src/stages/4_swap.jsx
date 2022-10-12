@@ -13,6 +13,11 @@ export default function Swap({app, setApp, appClient}){
 
 	const { data, isFetching, isError, refetch } = useQuery(['4', 'swap', swap], async () => {
 
+
+		const sp = await appClient.getSuggestedParams()
+		sp.flatFee = true
+		sp.fee = 2000
+
 		let result = await appClient.swap({
 			swap_xfer: makeAssetTransferTxnWithSuggestedParamsFromObject({
 			  from: appClient.sender,
@@ -21,7 +26,7 @@ export default function Swap({app, setApp, appClient}){
 			  amount: BigInt(1e3),
 			  assetIndex: swap ? app.data.asaA : app.data.asaB,
 			}),
-		});
+		}, {suggestedParams: sp});
 
 		return result.inners[0].txn.amount
 	})

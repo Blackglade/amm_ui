@@ -13,6 +13,10 @@ export default function Burn({app, setApp, appClient}){
 
 	const { data, isFetching, isError, refetch } = useQuery(['4', 'burn'], async () => {
 
+		const sp = await appClient.getSuggestedParams()
+		sp.flatFee = true
+		sp.fee = 3000
+
 		let result = await appClient.burn({
 			pool_xfer: makeAssetTransferTxnWithSuggestedParamsFromObject({
 			  from: appClient.sender,
@@ -21,7 +25,7 @@ export default function Burn({app, setApp, appClient}){
 			  amount: amount,
 			  assetIndex: app.data.poolToken,
 			}),
-		});
+		}, {suggestedParams: sp});
 		
 		console.log(result)
 

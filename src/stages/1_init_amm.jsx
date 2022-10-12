@@ -14,6 +14,10 @@ export default function InitAMM({app, setApp, appClient}){
 		const {appId} = await appClient.create();
 		const appAddress = getApplicationAddress(appId);
 
+		const sp = await appClient.getSuggestedParams()
+		sp.flatFee = true
+		sp.fee = 4000
+
 		setStep(1)
 		const bootstrapResult = await appClient.bootstrap({
 			seed: makePaymentTxnWithSuggestedParamsFromObject({
@@ -24,7 +28,7 @@ export default function InitAMM({app, setApp, appClient}){
 			}),
 			a_asset: app.data.asaA,
 			b_asset: app.data.asaB,
-		});
+		}, {suggestedParams: sp});
 		
 		if (bootstrapResult?.value === undefined) throw new Error("Bootstrap failed?");
 
