@@ -8,6 +8,11 @@ export default function AddLiquidity({app, setApp, appClient}){
 
 	const { data, isFetching, isError, refetch } = useQuery(['3', 'add_liquidity'], async () => {
 
+		const sp = await appClient.getSuggestedParams()
+		sp.flatFee = true
+		sp.fee = 4000
+
+
 		let result = await appClient.mint({
 			a_xfer: makeAssetTransferTxnWithSuggestedParamsFromObject({
 			  from: appClient.sender,
@@ -23,7 +28,7 @@ export default function AddLiquidity({app, setApp, appClient}){
 			  amount: BigInt(1e6),
 			  assetIndex: app.data.asaB,
 			}),
-		});
+		}, {suggestedParams: sp});
 
 		return result.inners[0].txn.amount
 	}, {
