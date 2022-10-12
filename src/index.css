@@ -4,3 +4,12 @@ html, body, #root  {
 	font-size: 16px;
 	font-family: 'IBM Plex Sans', sans-serif;
 }
+
+.App {
+	min-height: calc(100vh - 114px);
+}
+
+#footer {
+	font-weight: 600;
+	height: 50px;
+}

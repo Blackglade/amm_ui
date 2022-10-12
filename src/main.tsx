@@ -26,6 +26,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
-    <Alert id='footer' severity="error" style={{fontWeight: '600', marginTop: '4rem'}}>THIS APP IS FOR DEMO PURPOSES ONLY. DO NOT USE IN PRODUCTION.</Alert>
+    <Alert id='footer' severity="error">THIS APP IS FOR DEMO PURPOSES ONLY. DO NOT USE IN PRODUCTION.</Alert>
   </React.StrictMode>
 )
